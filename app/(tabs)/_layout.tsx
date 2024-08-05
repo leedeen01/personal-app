@@ -1,9 +1,16 @@
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import React from "react";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import { getAuth } from "firebase/auth";
 const TabsLayout = () => {
+  
+  getAuth().onAuthStateChanged((user) => {
+    if (!user) {
+      router.replace("/");
+    }
+  });
+
   return (
     <Tabs>
       <Tabs.Screen
@@ -40,5 +47,6 @@ const TabsLayout = () => {
     </Tabs>
   );
 };
+
 
 export default TabsLayout;
